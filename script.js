@@ -1,33 +1,39 @@
-const inputFill = document.getElementById("task-input");
-const getBtn = document.getElementById("addBtn");
-const outputFill = document.getElementById("task-list");
+const inputValue = document.getElementById("task-input");
+const btnValue = document.getElementById("addBtn");
+const ListValue = document.getElementById("task-list");
+const cleanList = document.getElementById("btn-clean");
 
-getBtn.addEventListener("click", function () {
-  const inputValue = inputFill.value;
+btnValue.addEventListener("click", function () {
+  const inputValueData = inputValue.value;
 
-  if (inputValue !== "") {
+  if (inputValueData !== "") {
     const newTodo = document.createElement("li");
-    const spanTodo = document.createElement("span");
-    spanTodo.textContent = inputValue;
     newTodo.className = "list-line";
+    const newSpan = document.createElement("span");
+    newSpan.textContent = inputValueData;
 
     const delBtn = document.createElement("button");
-    delBtn.textContent = "X";
     delBtn.className = "delete-btn";
+    delBtn.textContent = "x";
     newTodo.appendChild(delBtn);
-    newTodo.appendChild(spanTodo);
+    newTodo.appendChild(newSpan);
 
-    outputFill.appendChild(newTodo);
-    inputFill.value = "";
+    ListValue.appendChild(newTodo);
+    inputValue.value = "";
   } else {
     alert("Please enter some text first!");
   }
 });
 
-outputFill.addEventListener("click", function (event) {
-  if (event.target.classList.contains("delete-btn")) {
+ListValue.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete-btn")) {
     const removeBtn = event.target.parentElement;
-
     removeBtn.remove();
+  }
+});
+
+cleanList.addEventListener("click", function clearList(ulId) {
+  if (ListValue) {
+    ListValue.innerHTML = "";
   }
 });
